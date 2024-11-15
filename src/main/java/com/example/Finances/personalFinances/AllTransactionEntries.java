@@ -23,8 +23,8 @@ public class AllTransactionEntries {
     private String elss;
     private String stocks;
     private String mutualFunds;
-    private String mfGold;
-    private String gold;
+    private String goldMutualFund;
+    private String physicalGold;
     private String sgb;
     private String crypto;
     private String realEstate;

@@ -1,5 +1,6 @@
 package com.example.Finances.personalFinances;
 
+import lombok.extern.log4j.Log4j2;
 import org.apache.poi.ss.usermodel.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,16 +16,18 @@ import java.io.Reader;
 
 
 @Controller
+@Log4j2
 public class personalFinanceController {
     @RequestMapping("/fetchData")
     @ResponseBody
     public String hello() {
         String filePath = "C:\\Users\\Akshay Gurme\\IdeaProjects\\personalFinances\\src\\main\\resources\\Nov2024InputCSV.csv"; // Replace with your file path
         //Read excel
-        convertCSVtoPOJO(filePath);
-
-
         //Store it in POJO
+        var allRecords = convertCSVtoPOJO(filePath);
+        log.info("All Records {}",allRecords);
+        //Process this data into different objects so easy to handle
+
         //Print data
 
 
