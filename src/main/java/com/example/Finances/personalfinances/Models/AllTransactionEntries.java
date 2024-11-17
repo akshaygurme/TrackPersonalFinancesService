@@ -1,4 +1,4 @@
-package com.example.Finances.personalFinances;
+package com.example.Finances.personalfinances.Models;
 
 import lombok.Data;
 
