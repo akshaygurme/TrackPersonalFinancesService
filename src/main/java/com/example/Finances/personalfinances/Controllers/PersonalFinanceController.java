@@ -60,7 +60,7 @@ public class PersonalFinanceController {
             index++;
             BankBalance bankBalance;
             Investment investment;
-            Expense expense();
+            Expense expense;
 
             bankBalance = buildBankBalance(transaction);
             investment = buildInvestment(transaction);
