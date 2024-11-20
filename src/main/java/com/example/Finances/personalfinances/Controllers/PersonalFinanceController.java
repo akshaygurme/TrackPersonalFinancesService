@@ -4,30 +4,27 @@ import com.example.Finances.personalfinances.Models.*;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import com.opencsv.bean.CsvToBean;
+import com.opencsv.bean.CsvToBeanBuilder;
 import lombok.extern.log4j.Log4j2;
 import org.apache.poi.ss.usermodel.*;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 
 import java.io.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
-import com.opencsv.bean.CsvToBean;
-import com.opencsv.bean.CsvToBeanBuilder;
-
-import java.io.FileReader;
-import java.io.Reader;
 
 
 @Controller
 @Log4j2
 public class PersonalFinanceController {
-    @RequestMapping("/fetchData")
-    @ResponseBody
-    public String hello() throws JsonProcessingException {
+
+    @GetMapping("/fetchData")
+    public String fetchData(Model model) throws JsonProcessingException {
         String filePath = "src\\main\\resources\\Nov2024InputCSV.csv"; // Replace with your file path
         ObjectMapper mapper = new ObjectMapper();
         mapper.registerModule(new JavaTimeModule());
@@ -41,17 +38,29 @@ public class PersonalFinanceController {
         var hygieneTransactions = hygieneAllTransactions(allTransactions);
 
         //Print data
-        String json = mapper.writeValueAsString(hygieneTransactions);
-        log.info("----------------All Hygiened Transactions {}",json);
+//        String json = mapper.writeValueAsString(hygieneTransactions);
+//        log.info("----------------All Hygiened Transactions {}",json);
 
-        return "Hello World";
+        model.addAttribute("transaction",hygieneTransactions);
+        return "hygieneTransactions";
     }
 
+    @GetMapping("/hello")
+    public String showChart(Model model) {
+        // Sample data
+//        model.addAttribute("labels", new String[]{"January", "February", "March"});
+//        model.addAttribute("data", new int[]{10, 20, 30});
+        return "hellojsp"; // Corresponds to chartView.jsp
+    }
+
+    //TODO move hygiene function to Functions package
     private List<HygieneTransaction> hygieneAllTransactions(List<AllTransactionEntries> allTransactions) {
 
         List<HygieneTransaction> hygieneTransactions = new ArrayList<>();
+        Double index = 0.0;
         for(var transaction : allTransactions)
         {
+            index++;
             BankBalance bankBalance = new BankBalance();
             Investment investment = new Investment();
             Expense expense = new Expense();
@@ -64,7 +73,8 @@ public class PersonalFinanceController {
 
             HygieneTransaction hygieneTransaction = new HygieneTransaction();
             //TODO: make recordNumber auto increment
-            hygieneTransaction.setTransactionNumber(1);
+
+            hygieneTransaction.setTransactionNumber(index);
             hygieneTransaction.setDate(LocalDate.parse(transaction.getDate(),formatter));
             hygieneTransaction.setBankName(transaction.getBankName());
             hygieneTransaction.setTransactionTitle(transaction.getTransactionTitle());
@@ -107,7 +117,7 @@ public class PersonalFinanceController {
         Investment investment = new Investment();
         investment.setEmergencyFund(Double.parseDouble(transaction.getEmergencyFund().isEmpty() ? "0" : transaction.getEmergencyFund()));
         investment.setInvoiceDiscounting(Double.parseDouble(transaction.getInvoiceDiscounting().isEmpty() ? "0" : transaction.getInvoiceDiscounting()));
-        investment.setUsStocks(Double.parseDouble(transaction.getInvoiceDiscounting().isEmpty() ? "0" : transaction.getInvoiceDiscounting()));
+        investment.setUsStocks(Double.parseDouble(transaction.getUsStocks().isEmpty() ? "0" : transaction.getUsStocks()));
         investment.setCorporateBonds(Double.parseDouble(transaction.getCorporateBonds().isEmpty() ? "0" : transaction.getCorporateBonds()));
         investment.setCorporateBankFD(Double.parseDouble(transaction.getCorporateBankFD().isEmpty() ? "0" : transaction.getCorporateBankFD()));
         investment.setNps(Double.parseDouble(transaction.getNps().isEmpty() ? "0" : transaction.getNps()));

@@ -1,5 +1,5 @@
 Date,BankName,TransactionTitle,SbiBalance,AxisBalance,HdfcBalance,TotalCash,Salary,ReceivedAmount,EmergencyFund,InvoiceDiscounting,USStocks,CorporateBonds,CorporateBankFD,NPS,ELSS,Stocks,MutualFunds,GoldMutualFund,PhysicalGold,SGB,Crypto,RealEstate,Returns,Study,DailyNeeds,Insurance,Wants,Lend,Construction,Donation,Other
-01-Nov-24,SBI,Self Transfer HDFC to SBI 20100,65433.69,82582.8,42901.02,190917.51,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1
+01-Nov-24,SBI,Self Transfer HDFC to SBI 20100,65433.69,82582.8,42901.02,190917.51,1,2,31,41,51,61,71,81,91,101,111,121,131,141,151,161,171,181,191,201,211,221,231,241,251
 03-Nov-24,Axis,Lend Bobby Physicswallah fees,65433.69,79682.8,42901.02,188017.51,,,,,,,,,,,,,,,,,,,,,,2900,,,
 04-Nov-24,SBI,Grow SIP Nifty 50 SBI MF,61433.69,79682.8,42901.02,184017.51,,,,,,,,,,,4000,,,,,,,,,,,,,,
 04-Nov-24,SBI,Airtel My Mobile Data pack 15GB,61252.69,79682.8,42901.02,183836.51,,,,,,,,,,,,,,,,,,,181,,,,,,
