@@ -46,10 +46,7 @@ public class PersonalFinanceController {
     }
 
     @GetMapping("/hello")
-    public String showChart(Model model) {
-        // Sample data
-//        model.addAttribute("labels", new String[]{"January", "February", "March"});
-//        model.addAttribute("data", new int[]{10, 20, 30});
+    public String showChart() {
         return "hellojsp"; // Corresponds to chartView.jsp
     }
 
@@ -57,13 +54,13 @@ public class PersonalFinanceController {
     private List<HygieneTransaction> hygieneAllTransactions(List<AllTransactionEntries> allTransactions) {
 
         List<HygieneTransaction> hygieneTransactions = new ArrayList<>();
-        Double index = 0.0;
+        double index = 0.0;
         for(var transaction : allTransactions)
         {
             index++;
-            BankBalance bankBalance = new BankBalance();
-            Investment investment = new Investment();
-            Expense expense = new Expense();
+            BankBalance bankBalance;
+            Investment investment;
+            Expense expense();
 
             bankBalance = buildBankBalance(transaction);
             investment = buildInvestment(transaction);
@@ -146,7 +143,7 @@ public class PersonalFinanceController {
 
             allTransactionEntries.forEach(System.out::println);
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error("Error occured {}",e);
         }
         return allTransactionEntries;
 
@@ -179,7 +176,7 @@ public class PersonalFinanceController {
                 log.debug("\n");
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            log.error("Error occured {}",e);
         }
     }
 }
