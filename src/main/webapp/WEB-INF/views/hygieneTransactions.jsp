@@ -22,7 +22,7 @@
                 <th>Total Cash</th>
                 <th>Salary</th>
                 <th>Received Amount</th>
-                <th>Emergency Fund</th>
+                <th>Bank FDs</th>
                 <th>Invoice Discounting</th>
                 <th>US Stocks</th>
                 <th>Corporate Bonds</th>
@@ -61,7 +61,7 @@
                         <td>${row.bankBalance.totalCash}</td>
                         <td>${row.salary}</td>
                         <td>${row.receivedAmount}</td>
-                        <td>${row.investments.emergencyFund}</td>
+                        <td>${row.investments.bankFds}</td>
                         <td>${row.investments.invoiceDiscounting}</td>
                         <td>${row.investments.usStocks}</td>
                         <td>${row.investments.corporateBonds}</td>

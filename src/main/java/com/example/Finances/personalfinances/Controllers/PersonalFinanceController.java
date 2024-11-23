@@ -112,7 +112,7 @@ public class PersonalFinanceController {
     private Investment buildInvestment(AllTransactionEntries transaction) {
 
         Investment investment = new Investment();
-        investment.setEmergencyFund(Double.parseDouble(transaction.getEmergencyFund().isEmpty() ? "0" : transaction.getEmergencyFund()));
+        investment.setBankFds(Double.parseDouble(transaction.getBankFds().isEmpty() ? "0" : transaction.getBankFds()));
         investment.setInvoiceDiscounting(Double.parseDouble(transaction.getInvoiceDiscounting().isEmpty() ? "0" : transaction.getInvoiceDiscounting()));
         investment.setUsStocks(Double.parseDouble(transaction.getUsStocks().isEmpty() ? "0" : transaction.getUsStocks()));
         investment.setCorporateBonds(Double.parseDouble(transaction.getCorporateBonds().isEmpty() ? "0" : transaction.getCorporateBonds()));

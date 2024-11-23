@@ -14,7 +14,7 @@ public class AllTransactionEntries {
     private String totalCash;
     private String salary;
     private String receivedAmount;
-    private String emergencyFund;
+    private String bankFds;
     private String invoiceDiscounting;
     private String usStocks;
     private String corporateBonds;

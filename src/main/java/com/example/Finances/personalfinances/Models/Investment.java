@@ -4,7 +4,7 @@ import lombok.Data;
 
 @Data
 public class Investment {
-    private double emergencyFund;
+    private double bankFds;
     private double invoiceDiscounting;
     private double usStocks;
     private double corporateBonds;
