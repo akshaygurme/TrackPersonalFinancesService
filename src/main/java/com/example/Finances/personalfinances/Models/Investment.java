@@ -9,6 +9,7 @@ public class Investment {
     private double usStocks;
     private double corporateBonds;
     private double corporateBankFD;
+    private double debtMF;
     private double nps;
     private double elss;
     private double stocks;

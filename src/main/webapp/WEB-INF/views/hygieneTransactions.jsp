@@ -90,6 +90,11 @@
             <c:if test="${empty transaction}">
                 <p>No transactions available.</p>
             </c:if>
+
+            <form action="process" method="post">
+                <input type="hidden" name="total" value="${transaction}" />
+                <button type="submit">Process</button>
+            </form>
         </tbody>
 
     </table>
