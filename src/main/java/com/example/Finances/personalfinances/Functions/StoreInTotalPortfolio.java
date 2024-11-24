@@ -12,33 +12,14 @@ public class StoreInTotalPortfolio {
 
 //        TODO : write logic to fetch data from hygieneTransactions and calculate final financial Summary
         for(HygieneTransaction transaction : hygieneTransactions){
-            var total = transaction.getBankBalance().getTotalCash();
-//            total = total + financialSummary.getTotalCash();
-            financialSummary.setTotalCash(total);
-
-            total = transaction.getSalary();
-            total = total + financialSummary.getTotalSalary();
-            financialSummary.setTotalSalary(total);
-
-            total = transaction.getReceivedAmount();
-            total = total + financialSummary.getTotalReceived();
-            financialSummary.setTotalReceived(total);
-
-            total = transaction.getReturns();
-            total = total + financialSummary.getTotalReturns();
-            financialSummary.setTotalReturns(total);
-
-            TotalExpenses expenses = getTotalExpense(transaction, financialSummary);
-            financialSummary.setTotalExpenses(expenses);
-
-            TotalInvestment investment = getTotalInvestments(transaction, financialSummary);
-            financialSummary.setTotalInvestment(investment);
-
-
-            financialSummary.setTotalReceived(transaction.getReceivedAmount());
+            financialSummary.setTotalCash       (transaction.getBankBalance().getTotalCash());
+            financialSummary.setTotalSalary     (transaction.getSalary()            + financialSummary.getTotalSalary());
+            financialSummary.setTotalReceived   (transaction.getReceivedAmount()    + financialSummary.getTotalReceived());
+            financialSummary.setTotalReturns    (transaction.getReturns()           + financialSummary.getTotalReturns());
+            financialSummary.setTotalExpenses   (getTotalExpense(transaction, financialSummary));
+            financialSummary.setTotalInvestment (getTotalInvestments(transaction, financialSummary));
+            financialSummary.setTotalReceived   (transaction.getReceivedAmount());
         }
-        
-        
 //        TODO : Store financial Summary in database
 
         return financialSummary;
@@ -47,67 +28,21 @@ public class StoreInTotalPortfolio {
     private static TotalInvestment getTotalInvestments(HygieneTransaction transaction, FinancialSummary financialSummary) {
 
         TotalInvestment totalInvestment = new TotalInvestment();
-
-        var total = transaction.getInvestments().getBankFds();
-        total = total + financialSummary.getTotalInvestment().getBankFds();
-        totalInvestment.setBankFds(total);
-
-        total = transaction.getInvestments().getInvoiceDiscounting();
-        total = total + financialSummary.getTotalInvestment().getInvoiceDiscounting();
-        totalInvestment.setInvoiceDiscounting(total);
-
-        total = transaction.getInvestments().getUsStocks();
-        total = total + financialSummary.getTotalInvestment().getUSStocks();
-        totalInvestment.setUSStocks(total);
-
-        total = transaction.getInvestments().getCorporateBonds();
-        total = total + financialSummary.getTotalInvestment().getCorporateBonds();
-        totalInvestment.setCorporateBonds(total);
-
-        total = transaction.getInvestments().getCorporateBankFD();
-        total = total + financialSummary.getTotalInvestment().getCorporateBankFD();
-        totalInvestment.setCorporateBankFD(total);
-
-        total = transaction.getInvestments().getDebtMF();
-        total = total + financialSummary.getTotalInvestment().getDebtMF();
-        totalInvestment.setDebtMF(total);
-
-        total = transaction.getInvestments().getNps();
-        total = total + financialSummary.getTotalInvestment().getNps();
-        totalInvestment.setNps(total);
-
-        total = transaction.getInvestments().getElss();
-        total = total + financialSummary.getTotalInvestment().getElss();
-        totalInvestment.setElss(total);
-
-        total = transaction.getInvestments().getStocks();
-        total = total + financialSummary.getTotalInvestment().getStocks();
-        totalInvestment.setStocks(total);
-
-        total = transaction.getInvestments().getMutualFunds();
-        total = total + financialSummary.getTotalInvestment().getMutualFunds();
-        totalInvestment.setMutualFunds(total);
-
-        total = transaction.getInvestments().getGoldMutualFund();
-        total = total + financialSummary.getTotalInvestment().getGoldMutualFund();
-        totalInvestment.setGoldMutualFund(total);
-
-        total = transaction.getInvestments().getPhysicalGold();
-        total = total + financialSummary.getTotalInvestment().getPhysicalGold();
-        totalInvestment.setPhysicalGold(total);
-
-        total = transaction.getInvestments().getSgb();
-        total = total + financialSummary.getTotalInvestment().getSgb();
-        totalInvestment.setSgb(total);
-
-        total = transaction.getInvestments().getCrypto();
-        total = total + financialSummary.getTotalInvestment().getCrypto();
-        totalInvestment.setCrypto(total);
-
-        total = transaction.getInvestments().getRealEstate();
-        total = total + financialSummary.getTotalInvestment().getRealEstate();
-        totalInvestment.setRealEstate(total);
-
+        totalInvestment.setBankFds              (transaction.getInvestments().getBankFds()              + financialSummary.getTotalInvestment().getBankFds());
+        totalInvestment.setInvoiceDiscounting   (transaction.getInvestments().getInvoiceDiscounting()   + financialSummary.getTotalInvestment().getInvoiceDiscounting());
+        totalInvestment.setUSStocks             (transaction.getInvestments().getUsStocks()             + financialSummary.getTotalInvestment().getUSStocks());
+        totalInvestment.setCorporateBonds       (transaction.getInvestments().getCorporateBonds()       + financialSummary.getTotalInvestment().getCorporateBonds());
+        totalInvestment.setCorporateBankFD      (transaction.getInvestments().getCorporateBankFD()      + financialSummary.getTotalInvestment().getCorporateBankFD());
+        totalInvestment.setDebtMF               (transaction.getInvestments().getDebtMF()               + financialSummary.getTotalInvestment().getDebtMF());
+        totalInvestment.setNps                  (transaction.getInvestments().getNps()                  + financialSummary.getTotalInvestment().getNps());
+        totalInvestment.setElss                 (transaction.getInvestments().getElss()                 + financialSummary.getTotalInvestment().getElss());
+        totalInvestment.setStocks               (transaction.getInvestments().getStocks()               + financialSummary.getTotalInvestment().getStocks());
+        totalInvestment.setMutualFunds          (transaction.getInvestments().getMutualFunds()          + financialSummary.getTotalInvestment().getMutualFunds());
+        totalInvestment.setGoldMutualFund       (transaction.getInvestments().getGoldMutualFund()       + financialSummary.getTotalInvestment().getGoldMutualFund());
+        totalInvestment.setPhysicalGold         (transaction.getInvestments().getPhysicalGold()         + financialSummary.getTotalInvestment().getPhysicalGold());
+        totalInvestment.setSgb                  (transaction.getInvestments().getSgb()                  + financialSummary.getTotalInvestment().getSgb());
+        totalInvestment.setCrypto               (transaction.getInvestments().getCrypto()               + financialSummary.getTotalInvestment().getCrypto());
+        totalInvestment.setRealEstate           (transaction.getInvestments().getRealEstate()           + financialSummary.getTotalInvestment().getRealEstate());
 
         return totalInvestment;
 
@@ -116,45 +51,22 @@ public class StoreInTotalPortfolio {
     private static TotalExpenses getTotalExpense(HygieneTransaction transaction, FinancialSummary financialSummary) {
 
         TotalExpenses totalExpenses = new TotalExpenses();
-
-        var total = transaction.getExpenses().getStudy();
-        total = total + financialSummary.getTotalExpenses().getStudy();
-        totalExpenses.setStudy(total);
-
-        total = transaction.getExpenses().getDailyNeeds();
-        total = total + financialSummary.getTotalExpenses().getDailyNeeds();
-        totalExpenses.setDailyNeeds(total);
-
-        total = transaction.getExpenses().getInsurance();
-        total = total + financialSummary.getTotalExpenses().getInsurance();
-        totalExpenses.setInsurance(total);
-
-        total = transaction.getExpenses().getWants();
-        total = total + financialSummary.getTotalExpenses().getWants();
-        totalExpenses.setWants(total);
-
-        total = transaction.getExpenses().getLend();
-        total = total + financialSummary.getTotalExpenses().getLend();
-        totalExpenses.setLend(total);
-
-        total = transaction.getExpenses().getConstruction();
-        total = total + financialSummary.getTotalExpenses().getConstruction();
-        totalExpenses.setConstruction(total);
-
-        total = transaction.getExpenses().getDonation();
-        total = total + financialSummary.getTotalExpenses().getDonation();
-        totalExpenses.setDonation(total);
-
-        total = transaction.getExpenses().getOther();
-        total = total + financialSummary.getTotalExpenses().getOther();
-        totalExpenses.setOther(total);
+        
+        totalExpenses.setStudy      (transaction.getExpenses().getStudy()           + financialSummary.getTotalExpenses().getStudy());
+        totalExpenses.setDailyNeeds (transaction.getExpenses().getDailyNeeds()      + financialSummary.getTotalExpenses().getDailyNeeds());
+        totalExpenses.setInsurance  (transaction.getExpenses().getInsurance()       + financialSummary.getTotalExpenses().getInsurance());
+        totalExpenses.setWants      (transaction.getExpenses().getWants()           + financialSummary.getTotalExpenses().getWants());
+        totalExpenses.setLend       (transaction.getExpenses().getLend()            + financialSummary.getTotalExpenses().getLend());
+        totalExpenses.setConstruction(transaction.getExpenses().getConstruction()   + financialSummary.getTotalExpenses().getConstruction());
+        totalExpenses.setDonation   (transaction.getExpenses().getDonation()        + financialSummary.getTotalExpenses().getDonation());
+        totalExpenses.setOther      (transaction.getExpenses().getOther()           + financialSummary.getTotalExpenses().getOther());
 
         return totalExpenses;
     }
 
     private static FinancialSummary defaultFinancialSummary() {
         FinancialSummary financialSummary = new FinancialSummary();
-        //        for demo creating financialSummary.
+//      TODO : remove once data fetched from database.
         TotalExpenses expense = new TotalExpenses();
         expense.setConstruction(10000.0);
         expense.setLend(10000.0);
