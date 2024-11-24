@@ -15,7 +15,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static com.example.Finances.personalfinances.Functions.StoreInTotalPortfolio.storeTransactionInPortfolio;
 
@@ -55,18 +57,34 @@ public class PersonalFinanceController {
 
         model.addAttribute("transactionData", data);
         model.addAttribute("financialSummary", financialSummary);
-        return "hellojsp";
+        session.setAttribute("financialSummary", financialSummary);
+        session.setAttribute("transaction", data);
+        return "redirect:/emergencyFund";
     }
 
 
-    @PostMapping("/emergencyFund")
-    public String emergencyFund(HttpSession session, Model model) {
+    @GetMapping("/emergencyFund")
+    public String emergencyFund(HttpSession session, Model model) throws JsonProcessingException {
         List<HygieneTransaction> data = (List<HygieneTransaction>) session.getAttribute("transaction");
+        var financialSummary = (FinancialSummary) session.getAttribute("financialSummary");
         model.addAttribute("transactionData", data);
 
-        //Display pie-chart of values of Emergency fund (BankFds, corporateBankFD, DebtFunds, invoiceDiscounting, corporateBonds )
-//        var bankFds =
-        return "hellojsp";
+//        Display pie-chart of values of Emergency fund (BankFds, corporateBankFD, DebtFunds, invoiceDiscounting, corporateBonds )
+
+        Map<String, Double> investmentData = new HashMap<>();
+        investmentData.put("Bank FDs", financialSummary.getTotalInvestment().getBankFds());
+        investmentData.put("Invoice Discounting", financialSummary.getTotalInvestment().getInvoiceDiscounting());
+        investmentData.put("CorporateBank FD", financialSummary.getTotalInvestment().getCorporateBankFD());
+        investmentData.put("Debt MF", financialSummary.getTotalInvestment().getDebtMF());
+
+        // Convert the map to a JSON string
+        ObjectMapper objectMapper = new ObjectMapper();
+        String investmentDataJson = objectMapper.writeValueAsString(investmentData);
+
+        model.addAttribute("investmentData", investmentDataJson);
+        return "investmentPieChartView"; // JSP/Thymeleaf page
+
+//        return "hellojsp";
     }
 
     @GetMapping("/hello")
